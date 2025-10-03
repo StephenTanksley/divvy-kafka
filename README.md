@@ -159,5 +159,5 @@ pytest ./tests/test_divvy_producer.py::test_producer_send_failure
 ### Next Steps
 
 - Explore integrating Flink 
-
-- Debug my errors with Streamlit's map propagation/update function
+- Write integration tests to ensure that both producer and consumer are working together nicely.
+- Debug errors with Streamlit's map propagation/update function (which I caused)

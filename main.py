@@ -28,7 +28,7 @@ if __name__ == '__main__':
     running = True
     while running:
         # get data
-        current_station_info = load_current_station_info('./data/station_info_updated.json')
+        current_station_info = load_current_station_info('./data/station_status_updated.json')
         df = pd.DataFrame(current_station_info)
         with st.empty() as placeholder:
             st.write("Loading data...")
