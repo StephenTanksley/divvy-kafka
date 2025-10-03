@@ -2,6 +2,8 @@
 
 This project builds a real-time data pipeline that ingests live Divvy BikeShare station status from Lyft’s API, streams it through Apache Kafka, and visualizes availability on a Streamlit map. It solves common challenges in scalable, decoupled event-driven applications—automating data ingestion, buffering, and live presentation without complex orchestration.
 
+![overview](divvy-kafka.gif)
+
 #### Problems Solved
 
 - Continuous, up-to-date view of bike station availability
@@ -40,7 +42,6 @@ Producer → Kafka → Consumer → JSON → Streamlit Map
 ┌──────────┐   ┌────────┐   ┌───────────┐   ┌───────┐   ┌───────────────┐
 │ Producer │──▶│ Kafka  │──▶│ Consumer  │──▶│ JSON  │──▶│ Streamlit Map │
 └──────────┘   └────────┘   └───────────┘   └───────┘   └───────────────┘
-
 ```
 
 ## Setup & Quick Start
@@ -161,3 +162,4 @@ pytest ./tests/test_divvy_producer.py::test_producer_send_failure
 - Explore integrating Flink 
 - Write integration tests to ensure that both producer and consumer are working together nicely.
 - Debug errors with Streamlit's map propagation/update function (which I caused)
+- Integrate producer and consumer created here with the larger scale Divvy bikeshare project.
