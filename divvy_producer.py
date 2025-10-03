@@ -9,9 +9,10 @@ def produce_station_status_records(station_status_producer: KafkaProducer = None
     station_updates = requests.get(url='https://gbfs.lyft.com/gbfs/2.3/chi/en/station_status.json')
 
     station_status_unpacked = station_updates.json()['data']['stations']
-    for station in station_status_unpacked:
-        station_status_producer.send(topic='station-status', value=station)
-        print("Data sent to broker: ", station)
+    if len(station_status_unpacked) > 0:
+        for station in station_status_unpacked:
+            station_status_producer.send(topic='station-status', value=station)
+            print("Data sent to broker: ", station)
 
 
 if __name__ == '__main__':
@@ -28,4 +29,3 @@ if __name__ == '__main__':
     while running:
         produce_station_status_records(station_status_producer=producer)
         time.sleep(45)
-

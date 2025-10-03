@@ -3,7 +3,6 @@ import time
 
 from kafka import KafkaConsumer, TopicPartition  # Technically TopicPartition is not a public interface. I'm aware.
 from pandas import DataFrame
-import streamlit as st
 import pandas as pd
 from pandas import Series
 
@@ -78,10 +77,6 @@ def enrich_with_color(df_col: Series):
     return colors
 
 
-def update_map(station_dataframe: DataFrame=None):
-    return st.map(data=station_dataframe, latitude='lat', longitude='lon')
-
-
 if __name__ == '__main__':
     # Set up the consumer we'll need.
     bootstrap_servers = ['localhost:9092']
@@ -112,12 +107,9 @@ if __name__ == '__main__':
                 if 'station_id' in station_status_df.columns and 'station_id' in station_info_df.columns:
                     df = pd.merge(station_status_df, station_info_df, how='inner', on='station_id')
 
-                    df['num_ebikes_available'] = df['num_ebikes_available'].apply(impute_zero)
-                    df['num_scooters_available'] = df['num_scooters_available'].apply(impute_zero)
+                    # Enrichment logic
                     df['num_bikes_available'] = df['num_bikes_available'].apply(impute_zero)
-
                     df['cap_ratio'] = enrich_with_cap_ratio(num_bikes_available=df.get('num_bikes_available'), capacity=df.get('capacity'))
-
                     df['color'] = enrich_with_color(df['cap_ratio'])
 
                     # TODO: Eventually, I'll want to append a timestamp to this so we can compare station usage across timestamps.
@@ -131,4 +123,3 @@ if __name__ == '__main__':
                 print("Current dataframe is up to date")
         except Exception as e:
             print("Something went HORRIBLY wrong: ", str(e))
-        break
