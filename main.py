@@ -26,7 +26,7 @@ if __name__ == '__main__':
 
     st.title("Live Divvy Station Capacity")
     st.write("The maps which appear below are refreshing in 30 second increments to show changes in station usage.")
-    st.markdown(":red[Red dot] :  : Station has nearly reached its capacity for bicycles, docking a bike will be difficult, getting a bike will be easy.")
+    st.markdown(":red[Red dot] : Station has nearly reached its capacity for bicycles, docking a bike will be difficult, getting a bike will be easy.")
     st.markdown(":green[Green dot] : Station has a fairly even distribution of bikes available versus open docks. Getting a bike will be easy, docking a bike will be easy.")
     st.markdown(":blue[Blue dot] : Station has a low number of bikes available. Getting a bike will be difficult, docking a bike will be easy.")
     running = True
